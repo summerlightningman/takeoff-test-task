@@ -4,12 +4,9 @@ import replaceById from "../helpers/replace-by-id";
 import {Contact, ContactID, Name} from "../types/contact";
 
 const initialState: MainState = {
-    name: 'test',
-    token: 'tokentokentoken',
-    contactList: [
-        {id: 2, name: 'test', tel: '8800test'},
-        {id: 1, name: 'test', tel: '8800test'}
-    ]
+    name: '',
+    token: '',
+    contactList: []
 };
 
 const mainSlice = createSlice({
