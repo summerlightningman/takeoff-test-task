@@ -1,11 +1,13 @@
+import {KeyboardEventHandler, MouseEventHandler} from "react";
+
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {setLogin, setPass} from "../redux/login-slice";
+
 import CenteredContent from "./styled/centered-content";
 import LoginContainer from "./styled/login-container";
 import FormInput from "./styled/form-input";
 import FormHeader from "./styled/form-header";
 import FormSubmit from "./styled/form-submit";
-import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {KeyboardEventHandler, MouseEventHandler} from "react";
-import {setLogin, setPass} from "../redux/login-slice";
 
 const Login = () => {
     const {login, pass} = useAppSelector(state => state.login);
