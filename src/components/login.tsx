@@ -1,5 +1,7 @@
 import {KeyboardEventHandler, MouseEventHandler} from "react";
 
+import {signIn} from "../http";
+
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {setLogin, setPass} from "../redux/login-slice";
 
@@ -11,7 +13,8 @@ import FormSubmit from "./styled/form-submit";
 
 const Login = () => {
     const {login, pass} = useAppSelector(state => state.login);
-    const dispatch = useAppDispatch()
+    const {token} = useAppSelector(state => state.main);
+    const dispatch = useAppDispatch();
 
     const handleLoginInput: KeyboardEventHandler<HTMLInputElement> = e => {
         dispatch(setLogin(e.currentTarget.value));
@@ -23,7 +26,8 @@ const Login = () => {
 
     const handleSubmit: MouseEventHandler<HTMLButtonElement> = e => {
         e.preventDefault();
-    }
+        // signIn(login, pass)
+    };
 
     return <CenteredContent>
         <LoginContainer>
