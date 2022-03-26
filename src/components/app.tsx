@@ -1,6 +1,8 @@
+import Login from "./login";
+
 const App = () => {
     return (
-        <h1>App works!</h1>
+        <Login/>
     );
 }
 
