@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "admin",
+      "pass": "admin",
+      "token": "admin",
+      "contacts": [
+        {
+          "id": 1,
+          "name": "contact1",
+          "tel": "8-800-555-3535"
+        },
+        {
+          "id": 2,
+          "name": "contact2",
+          "tel": "1-234-567-8901"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "foo",
+      "pass": "bar",
+      "token": "123132123123",
+      "contacts": [
+        {
+          "id": 1,
+          "name": "contact11",
+          "tel": "5-353-555-00-88'"
+        },
+        {
+          "id": 2,
+          "name": "contact12",
+          "tel": "1-098-765-43-21"
+        }
+      ]
+    }
+  ]
+}
