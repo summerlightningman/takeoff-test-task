@@ -1,4 +1,5 @@
 import {Contact, ContactID, ContactList, Name} from "./contact";
+import {AnyAction} from "redux";
 
 export enum MainActionType {
     ADD_CONTACT = 'ADD_CONTACT',
@@ -14,17 +15,17 @@ export interface MainState {
     contactList: ContactList
 }
 
-export interface AddContactAction {
+export interface AddContactAction extends AnyAction {
     type: MainActionType.ADD_CONTACT,
     payload: Contact
 }
 
-export interface RemoveContactAction {
+export interface RemoveContactAction extends AnyAction {
     type: MainActionType.REMOVE_CONTACT,
     payload: ContactID
 }
 
-export interface UpdateContactAction {
+export interface UpdateContactAction extends AnyAction {
     type: MainActionType.UPDATE_CONTACT,
     payload: Contact
 }
