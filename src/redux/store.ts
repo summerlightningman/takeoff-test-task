@@ -1,11 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import mainReducer from "./main-reducer";
-import {RootActions, RootStates} from "../types/store";
+import {mainReducer} from "./main-slice";
+import {loginReducer} from "./login-slice";
 
-
-export const store = configureStore<RootStates, RootActions>({
+export const store = configureStore({
     reducer: {
-        main: mainReducer
+        main: mainReducer,
+        login: loginReducer
     }
 });
 
