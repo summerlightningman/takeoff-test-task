@@ -3,15 +3,32 @@ import LoginContainer from "./styled/login-container";
 import FormInput from "./styled/form-input";
 import FormHeader from "./styled/form-header";
 import FormSubmit from "./styled/form-submit";
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {KeyboardEventHandler, MouseEventHandler} from "react";
+import {setLogin, setPass} from "../redux/login-slice";
 
 const Login = () => {
+    const {login, pass} = useAppSelector(state => state.login);
+    const dispatch = useAppDispatch()
+
+    const handleLoginInput: KeyboardEventHandler<HTMLInputElement> = e => {
+        dispatch(setLogin(e.currentTarget.value));
+    };
+
+    const handlePassInput: KeyboardEventHandler<HTMLInputElement> = e => {
+        dispatch(setPass(e.currentTarget.value));
+    };
+
+    const handleSubmit: MouseEventHandler<HTMLButtonElement> = e => {
+        e.preventDefault();
+    }
 
     return <CenteredContent>
         <LoginContainer>
             <FormHeader>Sign in</FormHeader>
-            <FormInput placeholder="login"/>
-            <FormInput placeholder="password"/>
-            <FormSubmit>Login</FormSubmit>
+            <FormInput value={login} onInput={handleLoginInput} placeholder="login"/>
+            <FormInput value={pass} onInput={handlePassInput} placeholder="password"/>
+            <FormSubmit onClick={handleSubmit}>Login</FormSubmit>
         </LoginContainer>
     </CenteredContent>
 }
