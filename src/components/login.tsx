@@ -10,7 +10,7 @@ import {setToken} from "../redux/main-slice";
 import CenteredContent from "./styled/centered-content";
 import LoginContainer from "./styled/login-container";
 import FormInput from "./styled/form-input";
-import FormHeader from "./styled/form-header";
+import Header from "./styled/header";
 import FormSubmit from "./styled/form-submit";
 
 
@@ -44,7 +44,7 @@ const Login: FC = () => {
 
     return <CenteredContent>
         <LoginContainer>
-            <FormHeader>Sign in</FormHeader>
+            <Header>Sign in</Header>
             <FormInput value={login} onInput={handleLoginInput} placeholder="login"/>
             <FormInput value={pass} onInput={handlePassInput} placeholder="password"/>
             <FormSubmit onClick={handleSubmit}>Login</FormSubmit>
