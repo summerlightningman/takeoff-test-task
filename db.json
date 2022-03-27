@@ -5,7 +5,7 @@
       "name": "admin",
       "pass": "admin",
       "token": "admin",
-      "contacts": [
+      "contactList": [
         {
           "id": 1,
           "name": "contact1",
@@ -23,7 +23,7 @@
       "name": "foo",
       "pass": "bar",
       "token": "123132123123",
-      "contacts": [
+      "contactList": [
         {
           "id": 1,
           "name": "contact11",

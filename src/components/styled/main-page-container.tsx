@@ -6,7 +6,7 @@ const MainPageContainer = styled.main`
   margin-top: 5vh;
   height: 100vh;
   width: 50%;
-  padding: 0 50px;
+  padding: 20px 50px 0 50px;
 `;
 
 export default MainPageContainer

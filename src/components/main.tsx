@@ -9,9 +9,11 @@ import CenteredContent from "./styled/centered-content";
 import MainPageContainer from "./styled/main-page-container";
 import Header from "./styled/header";
 
+
 const Main: FC = () => {
     const {token} = useAppSelector(state => state.main);
     const navigate = useNavigate();
+
     useEffect(() => {
         if (!token)
             navigate('/login');
@@ -19,7 +21,7 @@ const Main: FC = () => {
 
     return <CenteredContent>
         <MainPageContainer>
-            <Header>My Contact book</Header>
+            <Header>Contact book</Header>
             <ContactList/>
         </MainPageContainer>
     </CenteredContent>
