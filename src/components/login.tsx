@@ -1,4 +1,5 @@
-import {KeyboardEventHandler, MouseEventHandler} from "react";
+import {FC, KeyboardEventHandler, MouseEventHandler} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {signIn} from "../http";
 
@@ -11,9 +12,9 @@ import LoginContainer from "./styled/login-container";
 import FormInput from "./styled/form-input";
 import FormHeader from "./styled/form-header";
 import FormSubmit from "./styled/form-submit";
-import {useNavigate} from "react-router-dom";
 
-const Login = () => {
+
+const Login: FC = () => {
     const {login, pass, message} = useAppSelector(state => state.login);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();

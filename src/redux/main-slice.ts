@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {MainState, Token} from "../types/main-reducer";
+import {MainState, Token} from "../types/main-slice";
 import replaceById from "../helpers/replace-by-id";
 import {Contact, ContactID, Name} from "../types/contact";
 

@@ -1,4 +1,4 @@
-import {Login, LoginState, Message, Password} from "../types/login-reducer";
+import {Login, LoginState, Message, Password} from "../types/login-slice";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: LoginState = {

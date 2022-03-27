@@ -1,4 +1,4 @@
-import {Login, Password} from "./types/login-reducer";
+import {Login, Password} from "./types/login-slice";
 
 const HOST = 'localhost';
 const PORT = 4000;

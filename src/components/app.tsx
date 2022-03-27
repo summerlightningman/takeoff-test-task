@@ -1,10 +1,10 @@
+import {FC} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import Login from "./login";
 import Main from "./main";
 
-
-const App = () => {
+const App: FC = () => {
     return (
         <Router>
             <Routes>
