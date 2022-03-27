@@ -20,7 +20,7 @@ const Main: FC = () => {
     return <CenteredContent>
         <MainPageContainer>
             <Header>My Contact book</Header>
-            {/*<ContactList/>*/}
+            <ContactList/>
         </MainPageContainer>
     </CenteredContent>
 }
