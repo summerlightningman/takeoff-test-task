@@ -18,7 +18,7 @@ const ContactList: FC = () => {
     }, [token]);
 
     return <ContactListContainer>
-        {contactList.map((contact) => <ContactListItem {...contact} />)}
+        {contactList.map((contact) => <ContactListItem {...contact} key={contact.id}/>)}
     </ContactListContainer>
 };
 

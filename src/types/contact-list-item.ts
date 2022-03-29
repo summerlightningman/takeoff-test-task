@@ -1,6 +1,6 @@
-import {IContact} from "./contact";
+import {Contact} from "./contact";
 
-export interface ContactListItemProps extends IContact{
+export interface ContactListItemProps extends Contact{
 
 
 }
