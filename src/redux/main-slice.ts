@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {MainState, Token} from "../types/main-slice";
-import {Contact, ContactList} from "../types/contact";
+import {Contact, ContactID, ContactList} from "../types/contact";
 
 const initialState: MainState = {
     token: '',
@@ -25,9 +25,12 @@ const mainSlice = createSlice({
 
             contact.name = newContact.name;
             contact.tel = newContact.tel;
+        },
+        removeContact(state, action: PayloadAction<ContactID>) {
+            state.contactList = state.contactList.filter(contact => contact.id !== action.payload);
         }
     }
 });
 
 export const mainReducer = mainSlice.reducer;
-export const {setToken, setContactList, setContactData} = mainSlice.actions;
+export const {setToken, setContactList, setContactData, removeContact} = mainSlice.actions;

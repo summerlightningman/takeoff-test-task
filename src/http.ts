@@ -1,30 +1,47 @@
 import {Login, Password} from "./types/login-slice";
 import {Token} from "./types/main-slice";
-import {Contact} from "./types/contact";
+import {Contact, ContactID} from "./types/contact";
 import replaceById from "./helpers/replace-by-id";
+import deleteById from "./helpers/delete-by-id";
 
 const HOST = 'localhost';
 const PORT = 4000;
 const URL = `http://${HOST}:${PORT}`;
 const users_url = URL + '/users';
 
-export const signIn = (login: Login, pass: Password) =>
+const getUserByToken = (token: Token) => fetch(users_url + `?token=${token}`)
+    .then(resp => resp.json())
+    .then(data => data[0]);
+
+export const signIn = async (login: Login, pass: Password) =>
     fetch(users_url + `?name=${login}&pass=${pass}`)
         .then(resp => resp.json())
         .then(data => data[0].token);
 
-export const getContactList = (token: Token) =>
-    fetch(users_url + `?token=${token}`)
-        .then(resp => resp.json())
-        .then(data => data[0].contactList);
+export const getContactList = async (token: Token) =>
+    getUserByToken(token)
+        .then(user => user.contactList);
 
-export const patchContactList = (token: Token, contact: Contact) =>
-    fetch(users_url + `?token=${token}`)
-        .then(resp => resp.json())
-        .then(data => {
-            const {id, contactList} = data[0];
+export const patchContactList = async (token: Token, contact: Contact) =>
+    getUserByToken(token)
+        .then(({id, contactList}) => {
             const body = {
                 contactList: replaceById(contactList, contact)
+            };
+            return fetch(users_url + `/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        });
+
+export const deleteContact = async (token: Token, contactId: ContactID) =>
+    getUserByToken(token)
+        .then(({id, contactList}) => {
+            const body = {
+                contactList: deleteById(contactList, contactId)
             };
             return fetch(users_url + `/${id}`, {
                 method: 'PATCH',

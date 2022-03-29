@@ -1,8 +1,7 @@
-interface IHasID {
-    id: number
-}
+import {IHasID} from "../types/common";
 
-const replaceById = <A extends IHasID>(list: A[], element: A): A[] =>
-    list.reduce((acc, val) => val.id === element.id ? [...acc, element] : [...acc, val], Array<A>());
+
+const replaceById = (list: IHasID[], element: IHasID): IHasID[] =>
+    list.reduce((acc, val) => val.id === element.id ? [...acc, element] : [...acc, val], Array<IHasID>());
 
 export default replaceById

@@ -2,7 +2,7 @@ import {FC, KeyboardEventHandler, useState} from "react";
 import {ContactListItemProps} from "../types/contact-list-item";
 import {Contact, ContactList, Name, PhoneNumber} from "../types/contact";
 
-import {patchContactList} from "../http";
+import {deleteContact, patchContactList} from "../http";
 
 import ContactListItemContainer from "./styled/contact-list-item-container";
 import ContactInfoContainer from "./styled/contact-info-container";
@@ -12,7 +12,7 @@ import {MdOutlineEdit, MdOutlineEditOff, MdDeleteOutline, MdOutlineSave} from "r
 import ControlButton from "./styled/control-button";
 import FormInput from "./styled/form-input";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {setContactData} from "../redux/main-slice";
+import {removeContact, setContactData} from "../redux/main-slice";
 
 
 const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
@@ -44,6 +44,13 @@ const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
         setIsEdit(false);
     };
 
+    const delete_ = () => {
+        deleteContact(token, id)
+            .then(() => {
+                dispatch(removeContact(id))
+            });
+    };
+
     if (isEdit)
         return <ContactListItemContainer>
             <ContactInfoContainer>
@@ -63,7 +70,7 @@ const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
         </ContactInfoContainer>
         <ControlContainer>
             <ControlButton onClick={toggleEditMode}><MdOutlineEdit size="25px"/></ControlButton>
-            <ControlButton><MdDeleteOutline size="25px"/></ControlButton>
+            <ControlButton onClick={delete_}><MdDeleteOutline size="25px"/></ControlButton>
         </ControlContainer>
     </ContactListItemContainer>
 };
