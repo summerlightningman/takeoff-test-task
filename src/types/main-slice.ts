@@ -1,9 +1,9 @@
-import {ContactList, Name} from "./contact";
+import {ContactList} from "./contact";
 
 export type Token = string;
 
+
 export interface MainState {
-    name: Name,
     token: Token,
     contactList: ContactList
 }

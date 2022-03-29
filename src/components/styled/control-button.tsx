@@ -7,12 +7,14 @@ const ControlButton = styled.button`
   background: darkgrey;
   border: none;
   color: white;
+  
   box-shadow: -4px 4px #373737;
   transform: translate(-4px, 4px);
   
   &:hover {
     transform: translate(-8px, 8px);
     box-shadow: none;
+    cursor: pointer;
   }
   
   &:active {

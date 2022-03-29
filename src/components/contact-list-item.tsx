@@ -1,6 +1,9 @@
 import {FC, KeyboardEventHandler, useState} from "react";
 import {ContactListItemProps} from "../types/contact-list-item";
-import {Name, PhoneNumber} from "../types/contact";
+import {Contact, ContactList, Name, PhoneNumber} from "../types/contact";
+
+import {patchContactList} from "../http";
+
 import ContactListItemContainer from "./styled/contact-list-item-container";
 import ContactInfoContainer from "./styled/contact-info-container";
 import ContactInfo from "./styled/contact-info";
@@ -8,8 +11,14 @@ import ControlContainer from "./styled/control-container";
 import {MdOutlineEdit, MdOutlineEditOff, MdDeleteOutline, MdOutlineSave} from "react-icons/md";
 import ControlButton from "./styled/control-button";
 import FormInput from "./styled/form-input";
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {setContactData} from "../redux/main-slice";
+
 
 const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
+    const {token} = useAppSelector(state => state.main);
+    const dispatch = useAppDispatch();
+
     const [tempName, setTempName] = useState<Name>(name);
     const [tempTel, setTempTel] = useState<PhoneNumber>(tel);
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -20,11 +29,20 @@ const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
     const handleTempTelInput: KeyboardEventHandler<HTMLInputElement> = e =>
         setTempTel(e.currentTarget.value);
 
-    const save = () => {
+    const save = async () => {
+        await patchContactList(token, {id, name: tempName, tel: tempTel})
+            .then(resp => resp.json())
+            .then(data => {
+                const contactList: ContactList = data.contactList;
+                const newContact: Contact | undefined = contactList.find(contact_ => contact_.id === id);
+
+                if (!newContact) return
+                dispatch(setContactData(newContact));
+            });
         setTempName(name);
         setTempTel(tel);
         setIsEdit(false);
-    }
+    };
 
     if (isEdit)
         return <ContactListItemContainer>
@@ -40,8 +58,8 @@ const ContactListItem: FC<ContactListItemProps> = ({id, name, tel}) => {
 
     return <ContactListItemContainer>
         <ContactInfoContainer>
-            <ContactInfo>{tempName}</ContactInfo>
-            <ContactInfo>{tempTel}</ContactInfo>
+            <ContactInfo>{name}</ContactInfo>
+            <ContactInfo>{tel}</ContactInfo>
         </ContactInfoContainer>
         <ControlContainer>
             <ControlButton onClick={toggleEditMode}><MdOutlineEdit size="25px"/></ControlButton>
