@@ -9,12 +9,13 @@ const PORT = 4000;
 const URL = `http://${HOST}:${PORT}`;
 const users_url = URL + '/users';
 
-const getUserByToken = (token: Token) => fetch(users_url + `?token=${token}`)
+const getUserByToken = (token: Token) => fetch(`${users_url}?token=${token}`)
     .then(resp => resp.json())
     .then(data => data[0]);
 
+
 export const signIn = async (login: Login, pass: Password) =>
-    fetch(users_url + `?name=${login}&pass=${pass}`)
+    fetch(`${users_url}?name=${login}&pass=${pass}`)
         .then(resp => resp.json())
         .then(data => data[0].token);
 
@@ -28,7 +29,7 @@ export const patchContactList = async (token: Token, contact: Contact) =>
             const body = {
                 contactList: replaceById(contactList, contact)
             };
-            return fetch(users_url + `/${id}`, {
+            return fetch(`${users_url}/${id}`, {
                 method: 'PATCH',
                 body: JSON.stringify(body),
                 headers: {
@@ -43,7 +44,7 @@ export const deleteContact = async (token: Token, contactId: ContactID) =>
             const body = {
                 contactList: deleteById(contactList, contactId)
             };
-            return fetch(users_url + `/${id}`, {
+            return fetch(`${users_url}/${id}`, {
                 method: 'PATCH',
                 body: JSON.stringify(body),
                 headers: {
