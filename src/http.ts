@@ -11,7 +11,8 @@ const users_url = URL + '/users';
 
 const getUserByToken = (token: Token) => fetch(`${users_url}?token=${token}`)
     .then(resp => resp.json())
-    .then(data => data[0]);
+    .then(data => data[0])
+    .catch(() => alert(`User with token ${token} not found :(`));
 
 
 export const signIn = async (login: Login, pass: Password) =>
@@ -21,7 +22,8 @@ export const signIn = async (login: Login, pass: Password) =>
 
 export const getContactList = async (token: Token) =>
     getUserByToken(token)
-        .then(user => user.contactList);
+        .then(user => user.contactList)
+        .catch(() => `User with token ${token} hasn't contacts`);
 
 export const patchContactList = async (token: Token, contact: Contact) =>
     getUserByToken(token)
@@ -51,4 +53,5 @@ export const deleteContact = async (token: Token, contactId: ContactID) =>
                     'Content-Type': 'application/json'
                 }
             })
-        });
+        })
+        .catch((e) => console.log(e));
