@@ -13,7 +13,7 @@ const ContactListItemSearch: FC<ContactListItemSearchProps> = ({onSearch}) => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             onSearch(searchingName);
-        }, 2000);
+        }, 1500);
 
         return () => clearTimeout(timeout)
     })
